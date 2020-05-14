@@ -1,16 +1,40 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<Compile Remove="ClassWithNonPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="ClassWithNonPublicProperties.Input.cs" />
+		<Compile Remove="ClassWithOnlyPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="ClassWithOnlyPublicProperties.Input.cs" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Content Include="ClassWithNonPublicProperties.ExpectedOutput.cs">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="ClassWithNonPublicProperties.Input.cs">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="ClassWithOnlyPublicProperties.ExpectedOutput.cs">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="ClassWithOnlyPublicProperties.Input.cs">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0-4.final" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+		<PackageReference Include="coverlet.collector" Version="1.2.1" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
-    <PackageReference Include="coverlet.collector" Version="1.2.0" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\Flogex.CeremonyGenerator\Flogex.CeremonyGenerator.csproj" />
+	</ItemGroup>
 </Project>
