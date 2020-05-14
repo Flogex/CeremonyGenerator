@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30105.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flogex.CeremonyGenerator", "Flogex.CeremonyGenerator\Flogex.CeremonyGenerator.csproj", "{73E00C31-A2F9-45B0-8034-AF9359D93D4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flogex.CeremonyGenerator", "Flogex.CeremonyGenerator\Flogex.CeremonyGenerator.csproj", "{73E00C31-A2F9-45B0-8034-AF9359D93D4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flogex.CeremonyGenerator.Supplements", "Flogex.CeremonyGenerator.Supplements\Flogex.CeremonyGenerator.Supplements.csproj", "{BFD92B6F-DDBF-4CC2-9511-BA3CCCDA8484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flogex.CeremonyGenerator.Supplements", "Flogex.CeremonyGenerator.Supplements\Flogex.CeremonyGenerator.Supplements.csproj", "{BFD92B6F-DDBF-4CC2-9511-BA3CCCDA8484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flogex.CeremonyGenerator.Tests", "Flogex.CeremonyGenerator.Tests\Flogex.CeremonyGenerator.Tests.csproj", "{3BA9C23C-D188-417B-88F5-A81C1FCADEC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flogex.CeremonyGenerator.Tests", "Flogex.CeremonyGenerator.Tests\Flogex.CeremonyGenerator.Tests.csproj", "{3BA9C23C-D188-417B-88F5-A81C1FCADEC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

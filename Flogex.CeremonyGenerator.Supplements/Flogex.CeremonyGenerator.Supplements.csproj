@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Flogex.SourceGenerator.Supplements</AssemblyName>
+		<RootNamespace>Flogex.SourceGenerator</RootNamespace>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Flogex.CeremonyGenerator</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 </Project>
