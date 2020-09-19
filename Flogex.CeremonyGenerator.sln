@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flogex.CeremonyGenerator.Su
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flogex.CeremonyGenerator.Tests", "Flogex.CeremonyGenerator.Tests\Flogex.CeremonyGenerator.Tests.csproj", "{3BA9C23C-D188-417B-88F5-A81C1FCADEC1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{CC0F9461-54F0-4AFF-ACDF-79D11CDEDD84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3BA9C23C-D188-417B-88F5-A81C1FCADEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BA9C23C-D188-417B-88F5-A81C1FCADEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BA9C23C-D188-417B-88F5-A81C1FCADEC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC0F9461-54F0-4AFF-ACDF-79D11CDEDD84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0F9461-54F0-4AFF-ACDF-79D11CDEDD84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0F9461-54F0-4AFF-ACDF-79D11CDEDD84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC0F9461-54F0-4AFF-ACDF-79D11CDEDD84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

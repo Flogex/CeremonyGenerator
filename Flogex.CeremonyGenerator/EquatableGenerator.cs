@@ -16,10 +16,10 @@ namespace Flogex.CeremonyGenerator
     [Generator]
     public class EquatableGenerator : ISourceGenerator
     {
-        public void Initialize(InitializationContext context)
+        public void Initialize(GeneratorInitializationContext context)
             => context.RegisterForSyntaxNotifications(() => new TypeDeclarationsReceiver());
 
-        public void Execute(SourceGeneratorContext context)
+        public void Execute(GeneratorExecutionContext context)
         {
             var receiver = (TypeDeclarationsReceiver)context.SyntaxReceiver!;
 
@@ -51,6 +51,8 @@ namespace Flogex.CeremonyGenerator
             }
 
             //TODO Process structs
+
+            // GetGeneratedFileName(string path) => $"{Path.GetFileNameWithoutExtension(path.Replace('\\', Path.DirectorySeparatorChar))}.generated";
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Flogex.CeremonyGenerator.Tests
+﻿namespace Flogex.CeremonyGenerator.Tests.Samples
 {
     [GenerateEquatable]
     public partial class TestClass

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Flogex.CeremonyGenerator.Tests
+namespace Flogex.CeremonyGenerator.Tests.Samples
 {
     internal partial class TestClass : IEquatable<TestClass>
     {
