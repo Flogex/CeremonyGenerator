@@ -23,8 +23,8 @@ namespace Flogex.CeremonyGenerator.Syntax
             return isPublicProperty && getter != default;
         }
 
-        public static bool IsPartial(this ClassDeclarationSyntax @class)
-            => @class.Modifiers.Contains(m => m.IsKind(SyntaxKind.PartialKeyword));
+        public static bool IsPartial(this TypeDeclarationSyntax type)
+            => type.Modifiers.Contains(m => m.IsKind(SyntaxKind.PartialKeyword));
 
         public static SyntaxNode GetRoot(this SyntaxNode syntaxNode)
         {
@@ -51,8 +51,8 @@ namespace Flogex.CeremonyGenerator.Syntax
         public static NamespaceDeclarationSyntax WithSingleMember(this NamespaceDeclarationSyntax @namespace, MemberDeclarationSyntax member)
             => @namespace.WithMembers(SingletonList(member));
 
-        public static ClassDeclarationSyntax WithSingleBase(this ClassDeclarationSyntax @class, BaseTypeSyntax @base)
-            => @class.WithBaseList(BaseList(SingletonSeparatedList(@base)));
+        public static TypeDeclarationSyntax WithSingleBase(this TypeDeclarationSyntax type, BaseTypeSyntax @base)
+            => type.WithBaseList(BaseList(SingletonSeparatedList(@base)));
 
         public static MethodDeclarationSyntax WithPublicModifier(this MethodDeclarationSyntax method)
             => method.AddModifiers(Token(SyntaxKind.PublicKeyword));

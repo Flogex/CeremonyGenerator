@@ -15,8 +15,6 @@ namespace Flogex.CeremonyGenerator.Tests
     {
         private static readonly string _workingDirectory
             = Environment.CurrentDirectory;
-        private static readonly CSharpParseOptions _parseOptions
-            = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview);
 
         [Theory]
         [ClassData(typeof(TestInputFiles))]
@@ -41,16 +39,10 @@ namespace Flogex.CeremonyGenerator.Tests
         {
             var extendeeFilePath = Path.Combine(_workingDirectory, inputFile);
             var extendeeSyntaxTree = CreateSyntaxTreeFromFile(extendeeFilePath);
-
-            var compilation = CreateCompilation(extendeeSyntaxTree);
+            var compilation = extendeeSyntaxTree.CreateCompilation();
 
             var sut = new EquatableGenerator();
-            var generatorDriver = CreateGeneratorDriver(sut).RunGenerators(compilation);
-
-            var generatorRunResult = generatorDriver
-                .GetRunResult()
-                .Results
-                .Single(_ => object.ReferenceEquals(_.Generator, sut));
+            var generatorRunResult = sut.RunGenerator(compilation);
 
             return generatorRunResult.GeneratedSources[0].SyntaxTree;
         }
@@ -61,25 +53,11 @@ namespace Flogex.CeremonyGenerator.Tests
             return CSharpSyntaxTree.ParseText(source);
         }
 
-        private static CSharpCompilation CreateCompilation(SyntaxTree syntaxTree)
-        {
-            var compilationOptions = new CSharpCompilationOptions(
-                OutputKind.DynamicallyLinkedLibrary,
-                nullableContextOptions: NullableContextOptions.Enable);
-            return CSharpCompilation.Create(
-                "Flogex.CeremonyGenerator.Tests.Samples",
-                syntaxTrees: new SyntaxTree[] { syntaxTree },
-                options: compilationOptions);
-        }
-
-        private static GeneratorDriver CreateGeneratorDriver(ISourceGenerator generator) =>
-            CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: _parseOptions);
-
         private static SyntaxTree GetExpectedSyntaxTree(string inputFile)
         {
             var outputFilePath = GetExpectedOutputFilePath(inputFile);
             var expectedSourceText = GetSourceTextFromFile(outputFilePath);
-            return CSharpSyntaxTree.ParseText(expectedSourceText, options: _parseOptions);
+            return CSharpSyntaxTree.ParseText(expectedSourceText);
         }
 
         private static string GetExpectedOutputFilePath(string inputFile)

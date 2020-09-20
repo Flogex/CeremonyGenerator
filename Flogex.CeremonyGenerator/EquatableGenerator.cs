@@ -1,10 +1,13 @@
 ﻿using System.Text;
 using Flogex.CeremonyGenerator.Syntax;
+using Flogex.CeremonyGenerator.Syntax.Classes;
+using Flogex.CeremonyGenerator.Syntax.Structs;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using static Flogex.CeremonyGenerator.DiagnosticDescriptors;
 
 namespace Flogex.CeremonyGenerator
 {
@@ -22,13 +25,20 @@ namespace Flogex.CeremonyGenerator
         {
             var receiver = (TypeDeclarationsReceiver)context.SyntaxReceiver!;
 
-            foreach (var extendee in receiver.ReceivedClasses)
+            foreach (var extendee in receiver.ReceivedTypes)
             {
-                TypeDeclarationSyntax? partialType = EquatableClassSyntax.Create(extendee, out var diagnostic);
+                Diagnostic diagnostic;
+
+                var partialType = extendee switch
+                {
+                    ClassDeclarationSyntax @class => EquatableClassSyntax.Create(@class, out diagnostic),
+                    StructDeclarationSyntax @struct => EquatableStructSyntax.Create(@struct, out diagnostic),
+                    _ => HandleNotAClassOrStruct(extendee, out diagnostic)
+                };
 
                 if (partialType is null)
                 {
-                    context.ReportDiagnostic(diagnostic!); //TODO Result class
+                    context.ReportDiagnostic(diagnostic!);
                     continue;
                 }
 
@@ -45,8 +55,12 @@ namespace Flogex.CeremonyGenerator
                 var source = SourceText.From(compilationUnit.NormalizeWhitespace().ToFullString(), Encoding.UTF8);
                 context.AddSource(extendee.Identifier.ToString() + ".WithEquatable.generated", source);
             }
+        }
 
-            //TODO Process structs
+        private static TypeDeclarationSyntax? HandleNotAClassOrStruct(TypeDeclarationSyntax type, out Diagnostic diagnostic)
+        {
+            diagnostic = TypeMustBeClassOrStruct(type);
+            return null;
         }
     }
 }

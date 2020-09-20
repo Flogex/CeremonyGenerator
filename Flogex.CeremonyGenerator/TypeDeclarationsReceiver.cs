@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Transactions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,20 +12,13 @@ namespace Flogex.CeremonyGenerator
     /// </summary>
     internal class TypeDeclarationsReceiver : ISyntaxReceiver
     {
-        private readonly List<ClassDeclarationSyntax> _classDeclarations = new List<ClassDeclarationSyntax>();
-        private readonly List<StructDeclarationSyntax> _structDeclarations = new List<StructDeclarationSyntax>();
+        private readonly List<TypeDeclarationSyntax> _declarations = new List<TypeDeclarationSyntax>();
 
         /// <summary>
-        /// The classes that are marked with <see cref="GenerateEquatableAttribute"/> and for which
+        /// The types that are marked with <see cref="GenerateEquatableAttribute"/> and for which
         /// therefore the IEquatable interface is generated.
         /// </summary>
-        public IReadOnlyCollection<ClassDeclarationSyntax> ReceivedClasses => _classDeclarations.AsReadOnly();
-
-        /// <summary>
-        /// The structs that are marked with <see cref="GenerateEquatableAttribute"/> and for which
-        /// therefore the IEquatable interface is generated.
-        /// </summary>
-        public IReadOnlyCollection<StructDeclarationSyntax> ReceivedStructs => _structDeclarations.AsReadOnly();
+        public IReadOnlyCollection<TypeDeclarationSyntax> ReceivedTypes => _declarations.AsReadOnly();
 
         /// <summary>
         /// Checks whether <paramref name="syntaxNode"/> is the <see cref="GenerateEquatableAttribute"/>. If yes, it
@@ -38,12 +32,8 @@ namespace Flogex.CeremonyGenerator
             {
                 // Parent of Attribute is AttributeList
                 // Parent of AttributeList is TypeDeclaration
-                var type = syntaxNode.Parent?.Parent;
-
-                if (type is ClassDeclarationSyntax @class)
-                    _classDeclarations.Add(@class);
-                else if (type is StructDeclarationSyntax @struct)
-                    _structDeclarations.Add(@struct);
+                if (syntaxNode.Parent?.Parent is TypeDeclarationSyntax type)
+                    _declarations.Add(type);
             }
         }
 

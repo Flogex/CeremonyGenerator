@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Flogex.CeremonyGenerator.Syntax
+namespace Flogex.CeremonyGenerator.Syntax.Classes
 {
     /// <summary>
     /// Generates the syntax for implementing object.GetHashCode.
@@ -15,7 +15,7 @@ namespace Flogex.CeremonyGenerator.Syntax
     /// </remarks>
     internal static class GetHashCodeSyntax
     {
-        public static MemberDeclarationSyntax Create(List<PropertyDeclarationSyntax> properties)
+        public static MemberDeclarationSyntax Create(IList<PropertyDeclarationSyntax> properties)
         {
             var getHashCodeMethod = MethodDeclaration(
                 PredefinedType(Token(SyntaxKind.IntKeyword)),
@@ -41,7 +41,7 @@ namespace Flogex.CeremonyGenerator.Syntax
                 .WithArgumentList(ArgumentList(SeparatedList(args)));
         }
 
-        private static BlockSyntax CreateAddSyntax(List<PropertyDeclarationSyntax> properties)
+        private static BlockSyntax CreateAddSyntax(IList<PropertyDeclarationSyntax> properties)
         {
             // var hash = new HashCode();
             var declaration = VariableDeclaration.Create("hash", nameof(HashCode));

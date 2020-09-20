@@ -11,20 +11,29 @@ namespace Flogex.CeremonyGenerator
     {
         private const string _errorCategory = "Flogex.CeremonyGenerator.Errors";
 
-        private static readonly Lazy<DiagnosticDescriptor> _classMustBePartial = new Lazy<DiagnosticDescriptor>(() =>
+        private static readonly Lazy<DiagnosticDescriptor> _typeMustBePartial = new Lazy<DiagnosticDescriptor>(() =>
             new DiagnosticDescriptor(
                 "FG0001",
-                $"Classes marked with {nameof(GenerateEquatableAttribute)} must be partial",
-                "{0} must be a partial class in order to implement IEquatable automatically",
+                $"Types marked with {nameof(GenerateEquatableAttribute)} must be partial",
+                "{0} must be a partial {1} in order to implement IEquatable automatically",
                 _errorCategory,
                 DiagnosticSeverity.Error,
                 true));
 
-        private static readonly Lazy<DiagnosticDescriptor> _classMustHavePublicProperties = new Lazy<DiagnosticDescriptor>(() =>
+        private static readonly Lazy<DiagnosticDescriptor> _typeMustHavePublicProperties = new Lazy<DiagnosticDescriptor>(() =>
             new DiagnosticDescriptor(
                 "FG0002",
-                $"Classes marked with {nameof(GenerateEquatableAttribute)} must have properties with public getter",
+                $"Types marked with {nameof(GenerateEquatableAttribute)} must have public properties",
                 "{0} must have properties with a public getter in order to implement IEquatable automatically",
+                _errorCategory,
+                DiagnosticSeverity.Error,
+                true));
+
+        private static readonly Lazy<DiagnosticDescriptor> _typeMustBeClassOrStruct = new Lazy<DiagnosticDescriptor>(() =>
+            new DiagnosticDescriptor(
+                "FG0003",
+                $"Only classes and structs can be marked with {nameof(GenerateEquatableAttribute)}",
+                "{0} is not a class or struct. IEquatable can therefore not be implemented automatically",
                 _errorCategory,
                 DiagnosticSeverity.Error,
                 true));
@@ -33,20 +42,29 @@ namespace Flogex.CeremonyGenerator
         /// The <see cref="Diagnosticr"/> to use when a class marked with
         /// <see cref="GenerateEquatableAttribute"/> is not partial.
         /// </summary>
-        public static Diagnostic ClassMustBePartial(ClassDeclarationSyntax @class)
+        public static Diagnostic TypeMustBePartial(TypeDeclarationSyntax type)
         {
             return Diagnostic.Create(
-                _classMustBePartial.Value,
-                @class.GetLocation(),
-                @class.Identifier.ToString());
+                _typeMustBePartial.Value,
+                type.GetLocation(),
+                type.Identifier.ToString(),
+                type is ClassDeclarationSyntax ? "class" : type is StructDeclarationSyntax ? "struct" : "type");
         }
 
-        public static Diagnostic ClassMustHavePublicProperties(ClassDeclarationSyntax @class)
+        public static Diagnostic TypeMustHavePublicProperties(TypeDeclarationSyntax type)
         {
             return Diagnostic.Create(
-                _classMustHavePublicProperties.Value,
-                @class.GetLocation(),
-                @class.Identifier.ToString());
+                _typeMustHavePublicProperties.Value,
+                type.GetLocation(),
+                type.Identifier.ToString());
+        }
+
+        public static Diagnostic TypeMustBeClassOrStruct(TypeDeclarationSyntax type)
+        {
+            return Diagnostic.Create(
+                _typeMustBeClassOrStruct.Value,
+                type.GetLocation(),
+                type.Identifier.ToString());
         }
     }
 }

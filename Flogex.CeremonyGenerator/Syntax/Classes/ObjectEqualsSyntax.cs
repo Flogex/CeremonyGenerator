@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Flogex.CeremonyGenerator.Syntax
+namespace Flogex.CeremonyGenerator.Syntax.Classes
 {
     /// <summary>
     /// Generates the syntax for implementing object.Equals.

@@ -11,33 +11,47 @@
 		<Compile Remove="ClassWithNonPublicProperties.Input.cs" />
 		<Compile Remove="ClassWithOnlyPublicProperties.ExpectedOutput.cs" />
 		<Compile Remove="ClassWithOnlyPublicProperties.Input.cs" />
+		<Compile Remove="StructWithPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="StructWithPublicProperties.Input.cs" />
+		<Compile Remove="TestTypes\ClassWithMoreThanEightPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="TestTypes\ClassWithMoreThanEightPublicProperties.Input.cs" />
+		<Compile Remove="TestTypes\ClassWithNonPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="TestTypes\ClassWithNonPublicProperties.Input.cs" />
+		<Compile Remove="TestTypes\ClassWithOnlyPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="TestTypes\ClassWithOnlyPublicProperties.Input.cs" />
+		<Compile Remove="TestTypes\StructWithPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="TestTypes\StructWithPublicProperties.Input.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<Content Include="ClassWithMoreThanEightPublicProperties.ExpectedOutput.cs">
+		<Content Include="TestTypes\ClassWithMoreThanEightPublicProperties.ExpectedOutput.cs">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="ClassWithNonPublicProperties.ExpectedOutput.cs">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		<Content Include="TestTypes\ClassWithMoreThanEightPublicProperties.Input.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="ClassWithNonPublicProperties.Input.cs">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		<Content Include="TestTypes\ClassWithNonPublicProperties.ExpectedOutput.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="ClassWithOnlyPublicProperties.ExpectedOutput.cs">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		<Content Include="TestTypes\ClassWithNonPublicProperties.Input.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="ClassWithOnlyPublicProperties.Input.cs">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		<Content Include="TestTypes\ClassWithOnlyPublicProperties.ExpectedOutput.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="TestTypes\ClassWithOnlyPublicProperties.Input.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="TestTypes\StructWithPublicProperties.ExpectedOutput.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="TestTypes\StructWithPublicProperties.Input.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Content Include="ClassWithMoreThanEightPublicProperties.Input.cs">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
-	
-	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="5.10.3" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-3.final" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0-preview-20200812-03" />
 		<PackageReference Include="xunit" Version="2.4.1" />
