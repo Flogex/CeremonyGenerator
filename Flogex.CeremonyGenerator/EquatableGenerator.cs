@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-using static Flogex.CeremonyGenerator.DiagnosticDescriptors;
 
 namespace Flogex.CeremonyGenerator
 {
@@ -23,36 +22,31 @@ namespace Flogex.CeremonyGenerator
         {
             var receiver = (TypeDeclarationsReceiver)context.SyntaxReceiver!;
 
-            foreach (var @class in receiver.ReceivedClasses)
+            foreach (var extendee in receiver.ReceivedClasses)
             {
-                if (@class.IsPartial() == false)
-                    context.ReportDiagnostic(ClassMustBePartial(@class));
+                TypeDeclarationSyntax? partialType = EquatableClassSyntax.Create(extendee, out var diagnostic);
 
-                MemberDeclarationSyntax? partialClass = EquatableClassSyntax.Create(@class);
-
-                if (partialClass is null)
+                if (partialType is null)
                 {
-                    context.ReportDiagnostic(ClassMustHavePublicProperties(@class));
+                    context.ReportDiagnostic(diagnostic!); //TODO Result class
                     continue;
                 }
 
-                var @namespace = @class.GetContainingNamespace();
+                var @namespace = extendee.GetContainingNamespace();
 
-                var compilationUnitMember = @namespace != null
-                    ? NamespaceDeclaration(@namespace.Name).WithSingleMember(partialClass)
-                    : partialClass;
+                MemberDeclarationSyntax compilationUnitMember = @namespace != null
+                    ? NamespaceDeclaration(@namespace.Name).WithSingleMember(partialType)
+                    : partialType;
 
                 var compilationUnit = CompilationUnit()
                     .WithSingleUsing(UsingDirective(IdentifierName("System"))) // Needed for IEquatable and HashCode
                     .WithSingleMember(compilationUnitMember);
 
                 var source = SourceText.From(compilationUnit.NormalizeWhitespace().ToFullString(), Encoding.UTF8);
-                context.AddSource(@class.Identifier.ToString() + ".EquatableGenerated.cs", source);
+                context.AddSource(extendee.Identifier.ToString() + ".WithEquatable.generated", source);
             }
 
             //TODO Process structs
-
-            // GetGeneratedFileName(string path) => $"{Path.GetFileNameWithoutExtension(path.Replace('\\', Path.DirectorySeparatorChar))}.generated";
         }
     }
 }

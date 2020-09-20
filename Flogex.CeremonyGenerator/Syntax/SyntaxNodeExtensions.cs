@@ -60,10 +60,10 @@ namespace Flogex.CeremonyGenerator.Syntax
         public static MethodDeclarationSyntax WithSingleParameter(this MethodDeclarationSyntax method, ParameterSyntax parameter)
             => method.WithParameterList(ParameterList(SingletonSeparatedList(parameter)));
 
-        public static bool HasModifiers(this AccessorDeclarationSyntax accessor)
-            => accessor.Modifiers.Any();
-
         public static InvocationExpressionSyntax WithSingleArgument(this InvocationExpressionSyntax invocation, ExpressionSyntax argument)
             => invocation.WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(argument))));
+
+        public static bool HasModifiers(this AccessorDeclarationSyntax accessor)
+            => accessor.Modifiers.Any();
     }
 }

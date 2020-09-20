@@ -5,6 +5,8 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
+		<Compile Remove="ClassWithMoreThanEightPublicProperties.ExpectedOutput.cs" />
+		<Compile Remove="ClassWithMoreThanEightPublicProperties.Input.cs" />
 		<Compile Remove="ClassWithNonPublicProperties.ExpectedOutput.cs" />
 		<Compile Remove="ClassWithNonPublicProperties.Input.cs" />
 		<Compile Remove="ClassWithOnlyPublicProperties.ExpectedOutput.cs" />
@@ -12,6 +14,9 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+		<Content Include="ClassWithMoreThanEightPublicProperties.ExpectedOutput.cs">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="ClassWithNonPublicProperties.ExpectedOutput.cs">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -24,6 +29,12 @@
 		<Content Include="ClassWithOnlyPublicProperties.Input.cs">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Content Include="ClassWithMoreThanEightPublicProperties.Input.cs">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 	
 	<ItemGroup>

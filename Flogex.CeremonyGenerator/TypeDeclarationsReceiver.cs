@@ -38,7 +38,7 @@ namespace Flogex.CeremonyGenerator
             {
                 // Parent of Attribute is AttributeList
                 // Parent of AttributeList is TypeDeclaration
-                var type = syntaxNode.Parent?.Parent; //TODO syntaxNode.Anchestors()?
+                var type = syntaxNode.Parent?.Parent;
 
                 if (type is ClassDeclarationSyntax @class)
                     _classDeclarations.Add(@class);

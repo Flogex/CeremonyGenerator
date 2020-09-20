@@ -22,7 +22,7 @@ namespace Flogex.CeremonyGenerator.Syntax
                         SyntaxKind.SimpleMemberAccessExpression,
                         ThisExpression(),
                         IdentifierName(propertyName)),
-                    IdentifierName("Equals")))
+                    IdentifierName(nameof(object.Equals))))
                 .WithSingleArgument(
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
